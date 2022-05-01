@@ -12,7 +12,7 @@ use Validator;
 class RegisterController extends Controller
 {
     function register( Request $req){
-        $req ->validate([
+        $validate= Validator::make($req ->all(),[
             'name'=>'required|max:150|min:2',
             'email' => 'required|string|email|max:255|unique:users,email',
             'password'=>'required|max:150',
