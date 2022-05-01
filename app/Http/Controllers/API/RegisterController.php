@@ -14,10 +14,17 @@ class RegisterController extends Controller
     function register( Request $req){
         $req ->validate([
             'name'=>'required|max:150|min:2',
-            'email'=>'required|max:150|unique',
+            'email' => 'required|string|email|max:255|unique:users,email',
             'password'=>'required|max:150',
         ]);
+        if($validate->fails())
+        {
+            return response()->json([
 
+                'validators errors' => $validate->messages(),
+             ],200);
+
+        }
         $user = new User;
         $user->name=$req->input('name');
         $user->email=$req->input('email');
