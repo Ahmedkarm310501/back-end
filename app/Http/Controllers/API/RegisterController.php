@@ -13,8 +13,8 @@ class RegisterController extends Controller
 {
     function register( Request $req){
         $req ->validate([
-            'name'=>'required|max:150|min:2',
-            'email'=>'required|max:150|unique',
+            'name'=>'required|string|max:150|min:2',
+            'email'=>'required|string|max:150',
             'password'=>'required|max:150',
         ]);
 
@@ -80,16 +80,38 @@ class RegisterController extends Controller
         'username'=>$user->name,
         ]);
     }
-    /*public function profileUpdate(Request $request){
 
-        $request->validate([
-            'name' =>'required|min:2|string|max:255',
-            'email'=>'required|email|string|max:255'
+    ////////////////////////////////////////////
+    ///////////////////////////////////////////
+   /* public function profileUpdate(Request $request){
+
+        $data = $request->validate([
+            'name' =>' nullable|min:2|string|max:150',
+            'email'=>'nullable|string|max:255'
         ]);
+
+
+       //if($request->fails()){
+      //      return response()->json($validator->errors()->toJson(), 400);
+        //}
+
         $user =Auth::user();
-        $user->name = $request['name'];
-        $user->email = $request['email'];
+        $user=$request->user();
+        $token = $request->bearerToken();
+
+
+        $user->name=$request['name'];
+        $user->name=$request['email'];
+       // $user->update([
+       //     'name'=>$request->name,
+        //    'email'=>$request->email
+        //]);
         $user->save();
-        return ['user profile updated succssfully'];
+        return response()->json([
+                'name'=>$user->name,
+                'email'=>$user->email,
+                'token'=>$token,
+                'message'=>'user profile updated succssfully',
+             ],200);
     }*/
 }
