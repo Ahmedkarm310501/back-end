@@ -80,38 +80,63 @@ class RegisterController extends Controller
         'username'=>$user->name,
         ]);
     }
+    ///////////////////////////////////////////
+    //////////////////////////////////////////
+    function get_profile(Request $request){
+        $user_id =$request->user()->id;
+        $user =User::find($request->user()->id);
+        if($user){
+            return response()->json([
+                'status' => 200,
+                'message' => 'userprofile',
+                'user'=>$user
+                ]);
+
+        }
+        return response()->json([
+            'status' => 500,
+            'message' => ' userprofile not found'
+                ]);
+
+    }
 
     ////////////////////////////////////////////
     ///////////////////////////////////////////
-   /* public function profileUpdate(Request $request){
+    public function profileUpdate(Request $request){
 
-        $data = $request->validate([
-            'name' =>' nullable|min:2|string|max:150',
-            'email'=>'nullable|string|max:255'
+        $Validator = Validator::make($request->all(),[
+            'name' =>'required|min:2|string|max:150',
+            'email'=>'require|email|unique:users,id,'.$request->user()->id ,
         ]);
-
-
-       //if($request->fails()){
-      //      return response()->json($validator->errors()->toJson(), 400);
-        //}
-
-        $user =Auth::user();
-        $user=$request->user();
+        $user_id =$request->user()->id;
+        $user =User::find($request->user()->id);
         $token = $request->bearerToken();
-
-
-        $user->name=$request['name'];
-        $user->name=$request['email'];
-       // $user->update([
-       //     'name'=>$request->name,
-        //    'email'=>$request->email
-        //]);
-        $user->save();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->update();
+       // $user->save();
         return response()->json([
                 'name'=>$user->name,
                 'email'=>$user->email,
                 'token'=>$token,
                 'message'=>'user profile updated succssfully',
              ],200);
-    }*/
+    }
+
+    /////////////////////////////////
+    ////////////////////////////////
+    function delete_user($id){
+        $user=User::where('id',$id)->delete();
+
+        if($user){
+            return response()->json([
+                'message'=>'User deleted succssfully',
+             ],200);
+        }
+        return response()->json([
+            'message'=>'User not found',
+         ],200);
+
+
+    }
 }
