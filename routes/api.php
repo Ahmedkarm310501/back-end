@@ -29,6 +29,9 @@ Route::post('logout',[RegisterController::class,'logout']);});
 
 Route::post('add_product',[ProductController::class,'add_product'] );
 
+Route::put('update_product/{id}',[ProductController::class,'update_product'] );
+
+
 Route::group(['middleware'=>'auth:sanctum'],function () {
 
     Route::get('get_profile', [RegisterController::class,'get_profile']);
@@ -37,7 +40,11 @@ Route::group(['middleware'=>'auth:sanctum'],function () {
 });
 
 
-Route::delete('delete_user/{id}', [RegisterController::class,'delete_user']);
+Route::delete('delete_user', [RegisterController::class,'delete_user']);
 
 
 Route::delete('delete_product/{id}', [ProductController::class,'delete_product']);
+
+Route::get('Allproducts', [ProductController::class,'get_All_products']);
+
+Route::get('product', [ProductController::class,'get_product']);

@@ -114,7 +114,6 @@ class RegisterController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->update();
-       // $user->save();
         return response()->json([
                 'name'=>$user->name,
                 'email'=>$user->email,
