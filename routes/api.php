@@ -48,3 +48,7 @@ Route::delete('delete_product/{id}', [ProductController::class,'delete_product']
 Route::get('Allproducts', [ProductController::class,'get_All_products']);
 
 Route::get('product', [ProductController::class,'get_product']);
+
+Route::post('profile',[RegisterController::class,'profile'] );
+
+Route::post('get-details',[RegisterController::class,'getDetails'] );
