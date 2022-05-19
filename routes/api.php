@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RegisterController;
+use App\Http\Controllers\API\ContactFormController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,7 @@ Route::post('login',[RegisterController::class,'login'] );
 Route::middleware(['auth:sanctum'])->group(function(){
     Route::post('logout',[RegisterController::class,'logout']);
 });
+Route::post('contact', [ContactFormController::class, 'ContactForm']);
 
 
 
