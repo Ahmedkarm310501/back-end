@@ -20,8 +20,19 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->boolean('status')->default(true);
+            $table->boolean('Is_Admin')->default(false);
+
             $table->timestamps();
         });
+
+        DB::table('users')->insert([
+            ['name'=>"mohamed",
+            'email'=>'mo@gamil.com',
+            'password'=>Hash::make('123'),
+            'Is_Admin'=>true,
+            ]
+        ]);
     }
 
     /**
