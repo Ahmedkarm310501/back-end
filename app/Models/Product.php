@@ -14,15 +14,21 @@ class Product extends Model
 
 
     ];
-    public function photos(){
 
-        return $this->hasMany(productPhoto::class, 'product_id');
-
-    }
 
     public function category(){
 
         return $this->belongsTo(Categery::class, 'category_id');
+
+    }
+    public function carts(){
+
+        return $this->hasMany(Cart::class, 'product_id');
+
+    }
+    public function favourite(){
+
+        return $this->hasMany(Favourite::class, 'product_id');
 
     }
 }

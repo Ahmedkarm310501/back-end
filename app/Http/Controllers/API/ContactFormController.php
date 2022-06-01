@@ -40,6 +40,9 @@ class ContactFormController extends Controller
         //$request->get('name'),$request->get('email'),$request->get('subject'),$request->get('message')
         Mail::to('youssefsalahcs@gmail.com')->send(new NotifyMail($request->get('name'),$request->get('email'),$request->get('subject'),$request->get('message')));
 
-        return response()->json(['success' => 'The email has been sent.']);
+        return response()->json([
+            'status'=>'200',
+            'success' => 'The email has been sent.'
+        ]);
     }
 }

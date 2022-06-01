@@ -27,8 +27,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-
-        'token'
+        'token',
+        'Is_Admin',
+        'status',
+        'date_of_birth',
 
 
     ];
@@ -65,6 +67,21 @@ class User extends Authenticatable
     public function addresses(){
 
         return $this->hasMany(Address::class, 'user_id');
+
+    }
+    public function carts(){
+
+        return $this->hasMany(Cart::class, 'user_id');
+
+    }
+    public function favourite(){
+
+        return $this->hasMany(Favourite::class, 'user_id');
+
+    }
+    public function orders(){
+
+        return $this->hasMany(Order::class, 'user_id');
 
     }
 }
